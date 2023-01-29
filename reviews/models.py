@@ -1,17 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
-from booking.models import Booking
 
 
 class Review(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
-    customer_name = models.ForeignKey(
-        Booking, on_delete=models.PROTECT, related_name="cust_name")
+    customer_name = models.CharField(max_length=100)
+    customer_email = models.EmailField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
-    content = models.TextField
+    content = models.TextField()
     image = CloudinaryField('image', default='placeholder')
+    reply = models.TextField()
 
     class Meta:
         ordering = ['-date']
